@@ -9,6 +9,8 @@
  */
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.AbstractMap;
 
 public class Evolve {
     static int numberIterations;
@@ -104,7 +106,9 @@ public class Evolve {
     }
     
     //Score each string by the number of letters that are correct in the correct position
-    public static StringBuffer select(ArrayList<StringBuffer> population, String targetString){
+    public static Object[] select(ArrayList<StringBuffer> population, String targetString){
+        ArrayList createdPop = new ArrayList<StringBuffer>();
+        
         int numberStrings = population.size(); //Number of strings in the population
         int score = 0; //Number of correct letter in the correct position for each string
         int maxScore = 0; //Maximal score
@@ -137,16 +141,39 @@ public class Evolve {
             }
         }
         
-        //Print best score
-        System.out.println("\n Best score: " + maxScore);
-        return bestFit;
+        //Pair containing best score and coresponding best fit
+        return new Object[]{bestFit, maxScore};
     }
     
     //Update population: create 100 of mtated copies of the selected string
     public static ArrayList updatePopulation(ArrayList previousGeneration, String targetString){
-        StringBuffer selectedString = select(previousGeneration, targetString);
+        //Selected string
+        StringBuffer selectedString = (StringBuffer)select(previousGeneration, targetString)[0];
+        
+        //Create next generation from selected string
         ArrayList nextGeneration = createPopulation(selectedString);
+        
         return nextGeneration;
+    }
+    
+    //Creation of a generation loop. 
+    //Create an initial population, update it until perfect score or maximum number of generation are hit.
+    public static StringBuffer evolve(String targetString){
+        //Initial population
+        ArrayList population = createPopulation(createRandomString(targetString));
+        
+        //Perfect score: every letter of the targetted string correspond
+        int perfectScore = targetString.length();
+        int score = 0;
+        int nbGenerations = 1; //Number of generations 
+        
+        //Stop is any string has a perfect score, or if the maximum number of generations has been reached
+        do{
+            updatePopulation(population, targetString);
+            score = (int)select(previousGeneration, targetString)[1];
+        } while ((score < perfectScore) | (nbGenerations < numberIterations));
+        
+        return ();
     }
     
     

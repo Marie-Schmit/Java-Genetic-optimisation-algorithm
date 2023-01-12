@@ -35,11 +35,9 @@ public class Weasel {
                 
         //Creation of Weasel object
         Weasel myWeasel = new Weasel();
+        //Evolution object
+        Evolve weaselEvolution = new Evolve();
         
-        
-        //Tests
-        //System.out.print(Evolve.createRandomString(targetString));
-        Evolve test = new Evolve();
         ArrayList population = Evolve.createPopulation(Evolve.createRandomString(targetString));
         System.out.println("___________Initial population____________");
         System.out.println(population);
