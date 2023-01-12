@@ -10,19 +10,14 @@
  * Implementation of Weasel program for Bonus practical with objects and classes
  */
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class Weasel {
     //Constructor
     public Weasel() {
     }
-
-        /*
-    public static int numberIteration;
-    //Number of copies
-    public static int popSize;
-    //Mutation rate
-    double mutationRate = 0.05;
-        */
+    
+    static final double MUTATIONRATE = 0.05;
     public static String targetString = "ME THINKS IT IS LIKE A WEASEL";
     
     
@@ -50,17 +45,26 @@ public class Weasel {
         System.out.println(Evolve.updatePopulation(population, targetString));
         */
         
-        System.out.println(Evolve.evolve(targetString));
+        System.out.println(run(targetString));
     }
     
-    public static StringBuffer run(String targetString){
+    public static StringBuffer run(String targetString){        
+        //Ask number of iterations
+        String strIteration = JOptionPane.showInputDialog(
+        null, "Enter the number of iterations", "Weasel", JOptionPane.QUESTION_MESSAGE);
+        //Parse this string into integer
+        int numberIteration = Integer.parseInt(strIteration);
+        
+        //Ask number of populations
+        String strPop = JOptionPane.showInputDialog(
+        null, "Enter the maximal number of population", "Weasel", JOptionPane.QUESTION_MESSAGE);
+        //Parse this string into integer
+        int popSize = Integer.parseInt(strPop);
+        
         //Evolution object
-        Evolve weaselEvolution = new Evolve();
+        Evolve weaselEvolution = new Evolve(numberIteration, popSize, MUTATIONRATE);
         
-        //Ask number of iterations and maximum number of copies
-        
-        
-        return Evolve.evolve(targetString);
+        return weaselEvolution.evolve(targetString);
     }
     
 }

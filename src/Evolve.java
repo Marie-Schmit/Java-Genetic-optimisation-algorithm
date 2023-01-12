@@ -26,9 +26,9 @@ public class Evolve {
     
     //Override constructor to pass parameters
     public Evolve(int nbIterations, int popSize, double mutRate) {
-        numberIterations = nbIterations;
-        popSize = popSize;
-        mutationRate = mutRate;
+        this.numberIterations = nbIterations;
+        this.popSize = popSize;
+        this.mutationRate = mutRate;
     }
     
     //Get a random character
@@ -190,7 +190,7 @@ public class Evolve {
             
             System.out.println("score: " + score + "\n best individual: " + (StringBuffer)select(nextPop, targetString)[0] + "\n" + "Iterations: " + nbGenerations);
             }
-        } while ((score < perfectScore) | (nbGenerations < numberIterations));
+        } while ((score < perfectScore) && (nbGenerations < numberIterations));
         
         return((StringBuffer)select(nextPop, targetString)[0]);
     }
