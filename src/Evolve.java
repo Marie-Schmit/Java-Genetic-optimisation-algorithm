@@ -136,6 +136,9 @@ public class Evolve {
                 maxScore = score;
             }
         }
+        
+        //Print best score
+        System.out.println("\n Best score: " + maxScore);
         return bestFit;
     }
     

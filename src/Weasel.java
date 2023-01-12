@@ -41,18 +41,14 @@ public class Weasel {
         //System.out.print(Evolve.createRandomString(targetString));
         Evolve test = new Evolve();
         ArrayList population = Evolve.createPopulation(Evolve.createRandomString(targetString));
-
-        //System.out.println(population);
-        System.out.println("Elements of ArrayList are:");
-        for (int i = 0; i < population.size(); i++) {
-            System.out.println(population.get(i) + " ");
-        }
+        System.out.println("___________Initial population____________");
+        System.out.println(population);
         
-        //System.out.println("_______________________");
-        //System.out.println(Evolve.select(population, targetString));
+        System.out.println("___________Selected population____________");
+        System.out.println(Evolve.select(population, targetString));
         
-        //System.out.println("_______________________");
-        //System.out.println(Evolve.updatePopulation(population, targetString));
+        System.out.println("_________Next Generation______________");
+        System.out.println(Evolve.updatePopulation(population, targetString));
         
     }
 }
