@@ -63,9 +63,12 @@ public class Evolve {
     }
     
     //Mutate a string at the given probability per character
-    public static StringBuffer mayMutate(StringBuffer copyString){
+    public static StringBuffer mayMutate(StringBuffer randomString){
         int i;
-        int len = copyString.length();
+        int len = randomString.length();
+        //Create a copy of the string, so all the copies are independant
+        StringBuffer copyString = new StringBuffer(randomString);
+        
         
         //Mutate or not each character
         for (i = 0; i < len; i++){
@@ -83,17 +86,19 @@ public class Evolve {
     //Method to create an initial population of popSize random individuals
         //Create copies of the initial random string
     public static ArrayList<StringBuffer> createPopulation(StringBuffer randomString){
-        int i;
-        //Create an array list that will contain the population created from a first random string
+        //Create an ArrayList to store the population
         ArrayList<StringBuffer> createdPop = new ArrayList<StringBuffer>();
+        //Add the first individual of the population
         createdPop.add(randomString);
-        //Create a string to save the copied mutations
+        int i;
+        
+        //Store mutate sentence
         StringBuffer mutateString = new StringBuffer();
         
-        //Create copies of the mutated random string
+        //Create mutated copies of original random string
         for (i = 0; i < popSize; i++){
             mutateString = mayMutate(randomString);
-            createdPop.add(new StringBuffer(mutateString)); //Create a new StringBuffer to avoid only adding the reference to the Array List
+            createdPop.add(new StringBuffer(mutateString));
         }
         return createdPop;
     }
