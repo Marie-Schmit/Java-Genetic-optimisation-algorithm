@@ -145,7 +145,7 @@ public class Evolve {
         return new Object[]{bestFit, maxScore};
     }
     
-    //Update population: create 100 of mtated copies of the selected string
+    //Update population: create 100 of mutated copies of the selected string
     public static ArrayList updatePopulation(ArrayList previousGeneration, String targetString){
         //Selected string
         StringBuffer selectedString = (StringBuffer)select(previousGeneration, targetString)[0];
@@ -160,20 +160,39 @@ public class Evolve {
     //Create an initial population, update it until perfect score or maximum number of generation are hit.
     public static StringBuffer evolve(String targetString){
         //Initial population
-        ArrayList population = createPopulation(createRandomString(targetString));
+        ArrayList previousPop = createPopulation(createRandomString(targetString));
+        //Updated population
+        ArrayList nextPop = new ArrayList();
         
         //Perfect score: every letter of the targetted string correspond
         int perfectScore = targetString.length();
-        int score = 0;
+        int score = (int)select(previousPop, targetString)[1]; //Score of the initial population
         int nbGenerations = 1; //Number of generations 
         
         //Stop is any string has a perfect score, or if the maximum number of generations has been reached
         do{
-            updatePopulation(population, targetString);
-            score = (int)select(previousGeneration, targetString)[1];
+            if(nbGenerations == 1){
+                //The previous population is the random one
+                //Update generation
+                nextPop = updatePopulation(previousPop, targetString);
+                //Save updated score
+                score = (int)select(previousPop, targetString)[1];
+                //Count iterations
+                nbGenerations ++;
+            }
+            else{
+                //Update generation
+            nextPop = updatePopulation(nextPop, targetString);
+            //Save updated score
+            score = (int)select(nextPop, targetString)[1];
+            //Count iterations
+            nbGenerations ++;
+            
+            System.out.println("score: " + score + "\n best individual: " + (StringBuffer)select(nextPop, targetString)[0] + "\n" + "Iterations: " + nbGenerations);
+            }
         } while ((score < perfectScore) | (nbGenerations < numberIterations));
         
-        return ();
+        return((StringBuffer)select(nextPop, targetString)[0]);
     }
     
     

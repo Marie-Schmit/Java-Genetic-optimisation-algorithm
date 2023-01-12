@@ -28,16 +28,17 @@ public class Weasel {
     
     //Main
     public static void main(String args[]) {
+        /*
         //Ask number of iterations and maximum number of copies
         int numberIteration = 30;
         int popSize = 100;
         double mutationRate = 0.05;
+        */
                 
         //Creation of Weasel object
         Weasel myWeasel = new Weasel();
-        //Evolution object
-        Evolve weaselEvolution = new Evolve();
         
+        /*
         ArrayList population = Evolve.createPopulation(Evolve.createRandomString(targetString));
         System.out.println("___________Initial population____________");
         System.out.println(population);
@@ -47,6 +48,19 @@ public class Weasel {
         
         System.out.println("_________Next Generation______________");
         System.out.println(Evolve.updatePopulation(population, targetString));
+        */
         
+        System.out.println(Evolve.evolve(targetString));
     }
+    
+    public static StringBuffer run(String targetString){
+        //Evolution object
+        Evolve weaselEvolution = new Evolve();
+        
+        //Ask number of iterations and maximum number of copies
+        
+        
+        return Evolve.evolve(targetString);
+    }
+    
 }
