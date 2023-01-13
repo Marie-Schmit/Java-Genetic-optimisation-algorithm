@@ -18,7 +18,7 @@ public class Weasel {
     }
     
     static final double MUTATIONRATE = 0.05;
-    public static String targetString = "ME THINKS IT IS LIKE A WEASEL";
+    public static String targetString = "METHINKS IT IS LIKE A WEASEL";
     
     
     //Main
